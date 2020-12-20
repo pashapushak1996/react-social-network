@@ -1,42 +1,30 @@
-import React, {Component} from "react";
+import React from "react";
 import './App.css'
+import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navbar";
+import Profile from "./components/Profile/Profile";
+import Dialogs from "./components/Dialogs/Dialogs";
+import {BrowserRouter, Route} from "react-router-dom";
+import Settings from "./components/Settings/Settings";
+import News from "./components/News/News";
+import Music from "./components/Music/Music";
 
 const App = () => {
     return (
-        <div className={`app-wrapper`}>
-            <header className={`header`}>
-                <img src="https://cdn.worldvectorlogo.com/logos/slack.svg" alt="2"/>
-            </header>
-            <nav className={`nav`}>
-                <div>Profile</div>
-                <div>Messages</div>
-                <div>News</div>
-                <div>Music</div>
-                <div>Settings</div>
-            </nav>
-            <div className={`content`}>
-                <div>
-                    <img
-                        src="https://static9.depositphotos.com/1594308/1110/i/600/depositphotos_11107478-stock-photo-fantasy.jpg"
-                        alt=""/>
+        <BrowserRouter>
+            <div className={`app-wrapper`}>
+                <Header/>
+                <Navbar/>
+                <div className={'app-wrapper-content'}>
+                    <Route path={`/profile`} component={Profile}/>
+                    <Route path={`/dialogs`} component={Dialogs}/>
+                    <Route path={`/news`} component={News}/>
+                    <Route path={`/music`} component={Music}/>
+                    <Route path={`/settings`} component={Settings}/>
                 </div>
-                <div>
-                    ava+description
-                </div>
-                <div>
-                    My posts
-                    <div>
-                        New post
-                    </div>
-                    <div>
-                        <div>Post 1</div>
-                        <div>Post 2</div>
-                    </div>
-                </div>
-
             </div>
-        </div>
+        </BrowserRouter>
     );
-}
+};
 
 export default App;
