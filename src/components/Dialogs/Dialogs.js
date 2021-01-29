@@ -3,16 +3,37 @@ import classes from './Dialogs.module.css'
 import DialogItem from "./DialogsItem/DialogsItem";
 import Message from "./Messages/Message";
 
+
 const Dialogs = (props) => {
-    const {dialogsPage:{dialogs,messages}} = props;
-    console.log(props);
+    const dialogsElements = props.dialogsPage.dialogs.map(d => <DialogItem name={d.name} id={d.id} key={d.id}/>);
+    const messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id}/>);
+
+
+    const onAddMessage = () => {
+        props.addMessage()
+    }
+    const onChangeMessageBody = (e) => {
+        const value = e.target.value;
+        props.updateMessageBody(value);
+    }
+
     return (
         <div className={classes.dialogs}>
             <div>
-                {dialogs.map(d => <DialogItem name={d.name} id={d.id} key={d.id}/>)}
+                {dialogsElements}
             </div>
             <div>
-                {messages.map(m => <Message message={m.message} key={m.id}/>)}
+                <div>{messagesElements}</div>
+                <div>
+                    <textarea
+                        placeholder={`Enter your message`}
+                        value={props.newMessageBody}
+                        onChange={event => onChangeMessageBody(event)}
+                    />
+                </div>
+                <div>
+                    <button onClick={onAddMessage}>Send message</button>
+                </div>
             </div>
         </div>
     )
