@@ -1,0 +1,11 @@
+.userPhoto{
+    width: 75px;
+    height: 75px;
+    border-radius: 40px;
+}
+.btnFollow{
+    background-color: lightgreen;
+}
+.btnUnfollow{
+    background-color: lightseagreen;
+}

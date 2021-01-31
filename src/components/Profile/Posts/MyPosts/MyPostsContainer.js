@@ -6,7 +6,7 @@ import {addPostCreator, updateNewPostBodyCreator} from "../../../../redux/action
 const mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posts,
-        newPostBody:state.profilePage.newPostBody
+        newPostBody: state.profilePage.newPostBody
     };
 };
 const mapDispatchToProps = (dispatch) => {
