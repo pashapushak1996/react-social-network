@@ -2,6 +2,7 @@ import React from "react";
 import imageUser from "./imageUser.png";
 import styles from "./Users.module.css";
 import axios from "axios";
+import {userService} from "../../services/users-service";
 
 
 class Users extends React.Component {
@@ -17,8 +18,8 @@ class Users extends React.Component {
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => this.props.setUsers(response.data.items));
+        userService.getUsers(pageNumber, this.props.pageSize)
+            .then(response => this.props.setUsers(response.items))
     }
 
     render() {
