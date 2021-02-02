@@ -3,4 +3,12 @@
 }
 .descriptionBlock{
     padding: 10px;
+    display: flex;
+}
+
+
+.avatar{
+    width: 100px;
+    height: 100px;
+    padding: 0 20px 0 10px ;
 }

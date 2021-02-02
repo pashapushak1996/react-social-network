@@ -1,17 +1,28 @@
 import React from "react";
-import classes from "./ProfileInfo.module.css";
-const ProfileInfo = () => {
+import {Loader} from "../../Loader/Loader";
+
+const ProfileInfo = (props) => {
+    const {profile} = props;
+
     return (
-        <div>
+        !profile ? <Loader/> :
             <div>
-                <img
-                    src="https://static9.depositphotos.com/1594308/1110/i/600/depositphotos_11107478-stock-photo-fantasy.jpg"
-                    alt=""/>
+                <div>
+                    <img
+                        src={profile.photos.large}
+                        alt="Avatar"/>
+                </div>
+                <div>
+                    <h1>{profile.fullName}</h1>
+                    <h4>{profile.aboutMe}</h4>
+                </div>
+                <div>
+                    <h2>Contacts:</h2>
+                    <b>Instagram:
+                        <i>{profile.contacts.instagram}</i>
+                    </b>
+                </div>
             </div>
-            <div className={classes.descriptionBlock}>
-                ava+description
-            </div>
-        </div>
     );
 }
 
