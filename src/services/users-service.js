@@ -8,4 +8,4 @@ class UsersService {
 }
 
 
-export const userServise = new UsersService();
+export const userService = new UsersService();

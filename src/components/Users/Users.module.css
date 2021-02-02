@@ -9,3 +9,6 @@
 .btnUnfollow{
     background-color: lightseagreen;
 }
+.selectedPage{
+    font-weight: bold;
+}
