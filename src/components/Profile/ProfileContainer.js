@@ -4,17 +4,19 @@ import {MyPostsContainer} from "./Posts/MyPosts/MyPostsContainer";
 import {connect} from "react-redux";
 import {setProfile} from "../../redux/reducers/profile-reducer";
 import {userService} from "../../services/users-service";
+import {withRouter} from "react-router-dom";
 
 class ProfileContainer extends React.Component {
-
     componentDidMount() {
-        userService.getProfile(2).then(res => this.props.setProfile(res.data))
+        const {match: {params: {userId}}} = this.props;
+        userService.getProfile(!userId ? 2 : userId).then(res => this.props.setProfile(res.data))
     }
+
 
     render() {
         return (
             <div>
-                <ProfileInfo profile={this.props.profilePage.profile}/>
+                <ProfileInfo profile={this.props.profile}/>
                 <MyPostsContainer/>
             </div>
         );
@@ -23,10 +25,12 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        profilePage: state.profilePage
+        profile: state.profilePage.profile
     }
 }
 
+let profileContainerWithRouter = withRouter(ProfileContainer);
+
 export default connect(mapStateToProps, {
     setProfile
-})(ProfileContainer);
+})(profileContainerWithRouter);
