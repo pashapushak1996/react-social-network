@@ -1,13 +1,19 @@
-import {AXIOS} from "./axiosConfig";
+import {instance} from "./axiosConfig";
 
 class UsersService {
     async getUsers(pageNum, pageSize) {
-        const {data} = await AXIOS.get(`/users?page=${pageNum}&${pageSize}`)
+        const {data} = await instance.get(`users?page=${pageNum}&count=${pageSize}`);
         return data
     }
 
-    async getProfile(userId) {
-        return await AXIOS.get(`/profile/${userId}`)
+    async followUser(userId) {
+        const {data} = await instance.post(`follow/${userId}`);
+        return data;
+    }
+
+    async unfollowUser(userId) {
+        const {data} = await instance.delete(`follow/${userId}`);
+        return data
     }
 }
 

@@ -1,6 +1,8 @@
-import {ADD_POST, UPDATE_NEW_POST_BODY} from "../action-types";
+import {profileService} from "../../services/profile-service";
 
-const SET_PROFILE = `SET_PROFILE`;
+export const ADD_POST = "ADD_POST";
+export const UPDATE_NEW_POST_BODY = "UPDATE_NEW_POST_BODY";
+export const SET_PROFILE = `SET_PROFILE`;
 
 const initialState = {
     posts: [
@@ -39,4 +41,16 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export const setProfile = (profile) => ({type: SET_PROFILE, profile});
+export const addPostCreator = () => ({type: ADD_POST});
+
+
+export const updateNewPostBodyCreator = (value) =>
+    ({type: UPDATE_NEW_POST_BODY, post: value});
+
+const setProfile = (profile) => ({type: SET_PROFILE, profile});
+
+export const getProfile = (userId) => (dispatch) => {
+    profileService.getProfile(!userId ? 14564 : userId).then(res => {
+        dispatch(setProfile(res.data))
+    })
+}

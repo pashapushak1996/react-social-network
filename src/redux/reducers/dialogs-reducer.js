@@ -1,4 +1,6 @@
-import {SEND_MESSAGE, UPDATE_NEW_MESSAGE_BODY} from "../action-types";
+const SEND_MESSAGE = 'SEND_MESSAGE';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+
 
 const initialState = {
     dialogs: [
@@ -42,3 +44,8 @@ const dialogsReducer = (state = initialState, action) => {
 }
 
 export default dialogsReducer;
+
+export const sendMessageCreator = () => ({type: SEND_MESSAGE});
+
+export const updateNewMessageBodyCreator = (value) =>
+    ({type: UPDATE_NEW_MESSAGE_BODY, message: value});
