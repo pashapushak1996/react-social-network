@@ -7,7 +7,6 @@ import {
     getUsers,
     setCurrentPage,
     setTotalUserCount,
-    toggleFollowingProgress,
     unfollowUser
 } from "../../redux/reducers/users-reducer";
 

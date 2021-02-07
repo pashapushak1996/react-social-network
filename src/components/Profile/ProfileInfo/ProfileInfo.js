@@ -2,6 +2,7 @@ import React from "react";
 import {Loader} from "../../Loader/Loader";
 import classes from './ProfileInfo.module.css';
 import imageProfile from '../../../assets/image/ProfileImage.svg'
+import Status from "./Status";
 
 const ProfileInfo = (props) => {
     const {profile} = props;
@@ -18,6 +19,10 @@ const ProfileInfo = (props) => {
                              src={!profile.photos.large ? imageProfile : profile.photos.large}
                              alt="Avatar"/>
                     </div>
+                    <div>
+                        <Status status={`Hello i am a programmer`}/>
+                    </div>
+
                     <div>
                         <h1>{profile.fullName}</h1>
                         <h4>{profile.aboutMe}</h4>

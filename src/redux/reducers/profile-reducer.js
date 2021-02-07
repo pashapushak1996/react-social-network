@@ -50,7 +50,7 @@ export const updateNewPostBodyCreator = (value) =>
 const setProfile = (profile) => ({type: SET_PROFILE, profile});
 
 export const getProfile = (userId) => (dispatch) => {
-    profileService.getProfile(!userId ? 14564 : userId).then(res => {
+    profileService.getProfile(!userId ? 2 : userId).then(res => {
         dispatch(setProfile(res.data))
     })
 }
