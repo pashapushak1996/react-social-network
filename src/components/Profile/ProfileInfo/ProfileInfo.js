@@ -6,7 +6,6 @@ import Status from "./Status";
 
 const ProfileInfo = (props) => {
     const {profile} = props;
-
     return (
         !profile ? <Loader/> :
             <div>
@@ -20,7 +19,7 @@ const ProfileInfo = (props) => {
                              alt="Avatar"/>
                     </div>
                     <div>
-                        <Status status={`Hello i am a programmer`}/>
+                        <Status status={props.status} updateStatus={props.updateStatus}/>
                     </div>
 
                     <div>
