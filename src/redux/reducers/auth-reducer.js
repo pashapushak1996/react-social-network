@@ -29,7 +29,6 @@ const setUserData = (userId, login, email) => ({type: SET_USER_DATA, data: {user
 export const getAuthUserData = () => (dispatch) => {
     authService.authMe().then(response => {
             if (response.resultCode === 0) {
-                console.log(response.data);
                 const {id, login, email} = response.data;
                 dispatch(setUserData(id, login, email))
             }

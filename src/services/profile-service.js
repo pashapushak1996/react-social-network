@@ -9,10 +9,10 @@ class ProfileService {
         return await instance.get(`profile/status/${userId}`)
     }
 
-    async updateStatus(status) {
-       const {data} = await instance.put(`/profile/status`, {status: status})
-        return data
+    async updateProfileStatus(status) {
+        return await instance.put(`profile/status`, {status: status})
     }
+
 }
 
 export const profileService = new ProfileService();

@@ -7,31 +7,38 @@ class Status extends React.Component {
         status: this.props.status
     };
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status});
+        }
+
+    };
+
     activateEditMode = () => {
         this.setState({editMode: true})
     };
 
     deactivateEditMode = () => {
-        this.setState({editMode: false});
+        this.setState({editMode: false})
         this.props.updateStatus(this.state.status);
     };
 
-    onStatusChange = (e) => {
-        this.setState({status: e.currentTarget.value});
-    }
+    onChangeStatus = ({target: {value}}) => {
+        this.setState({status: value})
+    };
 
 
     render() {
         return (
             <div>
                 {!this.state.editMode && <div onDoubleClick={this.activateEditMode}>
-                    <span>{this.props.status}</span>
+                    <span>{!this.props.status ? `no status` : this.props.status}</span>
                 </div>}
 
                 {this.state.editMode &&
                 <div>
                     <input type="text" autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.status}
-                           onChange={this.onStatusChange}/>
+                           onChange={this.onChangeStatus}/>
                 </div>
                 }
 

@@ -52,26 +52,27 @@ export const updateNewPostBodyCreator = (value) =>
     ({type: UPDATE_NEW_POST_BODY, post: value});
 
 const setProfile = (profile) => ({type: SET_PROFILE, profile});
+const setStatus = (status) => ({type: SET_STATUS, status})
 
-const setStatus = (status) => ({type: SET_STATUS, status});
 
 export const getProfile = (userId) => (dispatch) => {
-    profileService.getProfile(!userId ? 2 : userId).then(res => {
+    profileService.getProfile(!userId ? 14564 : userId).then(res => {
         dispatch(setProfile(res.data));
     });
 };
-
 export const getStatus = (userId) => (dispatch) => {
-    profileService.getProfileStatus(userId)
-        .then(res => dispatch(setStatus(res.data)));
+    profileService.getProfileStatus(!userId ? 14564 : userId)
+        .then(res => dispatch(setStatus(res.data)))
 };
 
 export const updateStatus = (status) => (dispatch) => {
-    profileService.updateStatus(status).then(res => {
-        if (res.resultCode === 0) {
-            dispatch(setStatus(status))
-        }
-    })
-}
+    profileService.updateProfileStatus(status)
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        })
+};
+
 
 export default profileReducer;

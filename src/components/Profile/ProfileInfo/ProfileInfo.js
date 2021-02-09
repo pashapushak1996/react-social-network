@@ -6,6 +6,7 @@ import Status from "./Status";
 
 const ProfileInfo = (props) => {
     const {profile} = props;
+    console.log(props);
     return (
         !profile ? <Loader/> :
             <div>
@@ -14,24 +15,18 @@ const ProfileInfo = (props) => {
                 </div>
                 <div className={classes.descriptionBlock}>
                     <div>
-                        <img className={classes.avatar}
-                             src={!profile.photos.large ? imageProfile : profile.photos.large}
+                        <img className={classes.avatar} src={!profile.photos.large ? imageProfile : profile.photos.large}
                              alt="Avatar"/>
+                    </div>
+                    <div>
+                        <h3>{props.profile.fullName}</h3>
                     </div>
                     <div>
                         <Status status={props.status} updateStatus={props.updateStatus}/>
                     </div>
-
-                    <div>
-                        <h1>{profile.fullName}</h1>
-                        <h4>{profile.aboutMe}</h4>
-                    </div>
-                    <div>
-                        <h2>Contacts:</h2>
-                        <b>Instagram:
-                            <i>{profile.contacts.instagram}</i>
-                        </b>
-                    </div>
+                    <b>Instagram:
+                        <i>{profile.contacts.instagram}</i>
+                    </b>
                 </div>
             </div>
     );

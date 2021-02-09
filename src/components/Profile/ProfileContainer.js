@@ -9,8 +9,9 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component {
     componentDidMount() {
         const {match: {params: {userId}}} = this.props;
-        this.props.getProfile(userId)
-        this.props.getStatus(userId)
+        this.props.getProfile(userId);
+        this.props.getStatus(userId);
+
     }
 
 
@@ -24,7 +25,7 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
-        status:state.profilePage.status
+        status: state.profilePage.status
     }
 }
 
