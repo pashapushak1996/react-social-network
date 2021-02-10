@@ -14,7 +14,7 @@ const reducers = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
+   form:formReducer
 })
 
 

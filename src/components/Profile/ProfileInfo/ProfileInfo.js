@@ -6,7 +6,6 @@ import Status from "./Status";
 
 const ProfileInfo = (props) => {
     const {profile} = props;
-    console.log(props);
     return (
         !profile ? <Loader/> :
             <div>
@@ -24,9 +23,6 @@ const ProfileInfo = (props) => {
                     <div>
                         <Status status={props.status} updateStatus={props.updateStatus}/>
                     </div>
-                    <b>Instagram:
-                        <i>{profile.contacts.instagram}</i>
-                    </b>
                 </div>
             </div>
     );
