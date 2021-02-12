@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import React from "react";
 import Users from "./Users";
-import {Loader} from "../Loader/Loader";
+import {Loader} from "../common/Loader/Loader";
 import {
     followUser,
     getUsers,

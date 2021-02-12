@@ -1,5 +1,5 @@
 import React from "react";
-import {Loader} from "../../Loader/Loader";
+import {Loader} from "../../common/Loader/Loader";
 import classes from './ProfileInfo.module.css';
 import imageProfile from '../../../assets/image/ProfileImage.svg'
 import Status from "./Status";
