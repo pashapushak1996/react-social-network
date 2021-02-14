@@ -1,7 +1,7 @@
 import React from "react";
-import classes from './InputLogin.module.css';
+import classes from './Input.module.css';
 
-export const InputLogin = ({input, meta, ...props}) => {
+export const Input = ({input, meta, ...props}) => {
     const {error, touched} = meta;
     const hasError = touched && error;
     return (

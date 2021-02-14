@@ -4,21 +4,28 @@ import Users from "./Users";
 import {Loader} from "../common/Loader/Loader";
 import {
     followUser,
-    getUsers,
+    requestUsers,
     setCurrentPage,
     setTotalUserCount,
     unfollowUser
 } from "../../redux/reducers/users-reducer";
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsLoading,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from '../../redux/reducers/users-selector'
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize);
+        this.props.requestUsers(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -32,19 +39,19 @@ class UsersContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        currentPage: state.usersPage.currentPage,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        pageSize: state.usersPage.pageSize,
-        isLoading: state.usersPage.isLoading,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        currentPage: getCurrentPage(state),
+        totalUsersCount: getTotalUsersCount(state),
+        pageSize: getPageSize(state),
+        isLoading: getIsLoading(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 };
 
 export default connect(mapStateToProps, {
     setTotalUserCount,
     setCurrentPage,
-    getUsers,
+    requestUsers,
     unfollowUser,
     followUser
 })(UsersContainer);

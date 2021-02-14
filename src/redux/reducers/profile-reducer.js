@@ -1,4 +1,5 @@
 import {profileService} from "../../services/profile-service";
+import {Redirect} from "react-router-dom";
 
 export const ADD_POST = "ADD_POST";
 export const SET_PROFILE = `SET_PROFILE`;
@@ -42,12 +43,12 @@ const setStatus = (status) => ({type: SET_STATUS, status})
 
 
 export const getProfile = (userId) => (dispatch) => {
-    profileService.getProfile(!userId ? 14564 : userId).then(res => {
+    profileService.getProfile(userId).then(res => {
         dispatch(setProfile(res.data));
     });
 };
 export const getStatus = (userId) => (dispatch) => {
-    profileService.getProfileStatus(!userId ? 14564 : userId)
+    profileService.getProfileStatus(userId)
         .then(res => dispatch(setStatus(res.data)))
 };
 

@@ -92,13 +92,13 @@ export const toggleFollowingProgress = (isDisabled, userId) => ({type: TOGGLE_FO
 
 // THUNK
 
-export const getUsers = (currentPage, pageSize) => (dispatch) => {
-    dispatch(setCurrentPage(currentPage));
-    dispatch(toggleIsLoading(true))
-    userService.getUsers(currentPage, pageSize).then(data => {
-        dispatch(setUsers(data.items))
-        dispatch(setTotalUserCount(data.totalCount))
-        dispatch(toggleIsLoading(false))
+export const requestUsers = (page, pageSize) => (dispatch) => {
+    dispatch(toggleIsLoading(true));
+    dispatch(setCurrentPage(page));
+    userService.getUsers(page, pageSize).then(data => {
+        dispatch(setUsers(data.items));
+        dispatch(setTotalUserCount(data.totalCount));
+        dispatch(toggleIsLoading(false));
     });
 };
 

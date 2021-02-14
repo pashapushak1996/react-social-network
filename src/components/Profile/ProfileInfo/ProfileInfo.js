@@ -10,11 +10,12 @@ const ProfileInfo = (props) => {
         !profile ? <Loader/> :
             <div>
                 <div className={classes.content}>
-                    <img src="https://i.pinimg.com/originals/aa/98/ce/aa98ce342844fe8f283bd3cb650425e7.jpg" alt=""/>
+
                 </div>
                 <div className={classes.descriptionBlock}>
                     <div>
-                        <img className={classes.avatar} src={!profile.photos.large ? imageProfile : profile.photos.large}
+                        <img className={classes.avatar}
+                             src={!profile.photos.large ? imageProfile : profile.photos.large}
                              alt="Avatar"/>
                     </div>
                     <div>
