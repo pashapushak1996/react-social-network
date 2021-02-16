@@ -1,4 +1,5 @@
 import {userService} from "../../services/users-service";
+import {userPropsChange} from "../../utils/helpers/helpers";
 
 // ACTION-TYPES
 
@@ -25,30 +26,14 @@ const usersReducer = (state = initialState, action) => {
         case FOLLOW: {
             return {
                 ...state,
-                users: state.users.map((user) => {
-                    if (user.id === action.userId) {
-                        return {
-                            ...user,
-                            followed: true
-                        }
-                    }
-                    return user
-                })
+                users: userPropsChange(state.users, "id", action.userId, {followed: true})
             }
         }
         case UNFOLLOW: {
 
             return {
                 ...state,
-                users: state.users.map((user) => {
-                    if (user.id === action.userId) {
-                        return {
-                            ...user,
-                            followed: false
-                        }
-                    }
-                    return user
-                })
+                users: userPropsChange(state.users, "id", action.userId, {followed: false})
             }
         }
         case SET_USERS: {
@@ -92,34 +77,30 @@ export const toggleFollowingProgress = (isDisabled, userId) => ({type: TOGGLE_FO
 
 // THUNK
 
-export const requestUsers = (page, pageSize) => (dispatch) => {
+export const requestUsers = (page, pageSize) => async (dispatch) => {
     dispatch(toggleIsLoading(true));
     dispatch(setCurrentPage(page));
-    userService.getUsers(page, pageSize).then(data => {
-        dispatch(setUsers(data.items));
-        dispatch(setTotalUserCount(data.totalCount));
-        dispatch(toggleIsLoading(false));
-    });
+    const data = await userService.getUsers(page, pageSize)
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUserCount(data.totalCount));
+    dispatch(toggleIsLoading(false));
 };
 
-export const unfollowUser = (userId) => (dispatch) => {
+export const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator, toggleFollowingProgress) => {
     dispatch(toggleFollowingProgress(true, userId));
-    userService.unfollowUser(userId)
-        .then(res => {
-            if (res.resultCode === 0) {
-                dispatch(unfollowSuccess(userId));
-            }
-            dispatch(toggleFollowingProgress(false, userId));
-        });
+    const res = await apiMethod(userId);
+    if (res.resultCode === 0) {
+        dispatch(actionCreator(userId));
+    }
+    dispatch(toggleFollowingProgress(false, userId));
 }
 
-export const followUser = (userId) => (dispatch) => {
-    dispatch(toggleFollowingProgress(true, userId));
-    userService.followUser(userId)
-        .then(res => {
-            if (res.resultCode === 0) {
-                dispatch(followSuccess(userId));
-            }
-            dispatch(toggleFollowingProgress(false, userId));
-        });
+
+export const unfollowUser = (userId) => async (dispatch) => {
+    followUnfollowFlow(dispatch, userId, userService.unfollowUser, unfollowSuccess, toggleFollowingProgress);
+}
+
+
+export const followUser = (userId) => async (dispatch) => {
+    followUnfollowFlow(dispatch, userId, userService.followUser, followSuccess, toggleFollowingProgress);
 }

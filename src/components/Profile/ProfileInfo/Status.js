@@ -1,51 +1,42 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-class Status extends React.Component {
+const Status = (props) => {
+    const [editMode, setEditMode] = useState(false);
+    const [status, setStatus] = useState('');
 
-    state = {
-        editMode: false,
-        status: this.props.status
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+
+
+    const activateEditMode = () => {
+        setEditMode(true);
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.status !== this.props.status) {
-            this.setState({status: this.props.status});
-        }
-
+    const deactivateEditMode = () => {
+        setEditMode(false);
+        props.updateStatus(status);
     };
 
-    activateEditMode = () => {
-        this.setState({editMode: true})
+    const onChangeStatus = ({target: {value}}) => {
+        setStatus(value)
     };
 
-    deactivateEditMode = () => {
-        this.setState({editMode: false})
-        this.props.updateStatus(this.state.status);
-    };
+    return (
+        <div>
+            {!editMode && <div onDoubleClick={activateEditMode}>
+                <span>{!props.status ? `no status` : props.status}</span>
+            </div>}
 
-    onChangeStatus = ({target: {value}}) => {
-        this.setState({status: value})
-    };
-
-
-    render() {
-        return (
+            {editMode &&
             <div>
-                {!this.state.editMode && <div onDoubleClick={this.activateEditMode}>
-                    <span>{!this.props.status ? `no status` : this.props.status}</span>
-                </div>}
-
-                {this.state.editMode &&
-                <div>
-                    <input type="text" autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.status}
-                           onChange={this.onChangeStatus}/>
-                </div>
-                }
-
+                <input type="text" autoFocus={true} onBlur={deactivateEditMode} value={status}
+                       onChange={onChangeStatus}/>
             </div>
-        )
+            }
 
-    }
+        </div>
+    )
 }
 
 export default Status;
