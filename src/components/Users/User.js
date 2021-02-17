@@ -1,12 +1,12 @@
 import React from "react";
 import {UserImage} from "./UserImage";
 
-export const User = ({users, followingInProgress, unfollowUser, followUser}) => {
+export const User = ({user, followingInProgress, followUser, unfollowUser}) => {
     return (
         <div>
-            {users.map((user) => <div key={user.id}>
+            <div>
                   <span>
-                     <UserImage user={user}/>
+                     <UserImage {...user}/>
                     <span>
                         <div>{user.name}</div>
                         <div>{user.status}</div>
@@ -23,7 +23,7 @@ export const User = ({users, followingInProgress, unfollowUser, followUser}) => 
                             }>Follow</button>}
                     </div>
                 </span>
-            </div>)}
+            </div>
         </div>
     );
 }

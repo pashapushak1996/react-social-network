@@ -1,3 +1,9 @@
-.selectedPage{
+.selectedPage {
     font-weight: bold;
+    border: 1px black solid;
+}
+
+.page {
+    border: 1px black solid;
+    font-size: 20px;
 }
